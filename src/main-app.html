@@ -14,18 +14,580 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/app-layout/app-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="../bower_components/iron-iconset/iron-iconset.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="user-data.html">
+<link rel="import" href="engine-data.html">
+<link rel="import" href="become-host.html">
+<link rel="import" href="search-bar.html">
+
 
 <dom-module id="main-app">
-  <style>
-    :host {
-      display: block;
-    }
-  </style>
   <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+    /* for main element - mobile first*/
+      :host{
+        --font-color: {
+          color: #919296;
+          font-family: 'Roboto';
+          font-weight: 200;
+          font-size: 13px;
+        };
+      }
+      app-drawer-layout{
+      	height: 100%;
+      }
+
+      /*for engine-data to hide element*/
+      engine-data{
+        display: none;
+      }
+      paper-listbox a{
+        text-decoration : none;
+      }
+      .app-toolbar-hoster{
+        display:flex;
+        @apply(--layout-end-justified);
+        position: relative;
+        left:5%;
+      }
+      .form{
+      	display: none;
+      }
+
+      div.main-content{
+      	width: 1024px;
+      	margin: 0 auto;
+      	background-color: #fff;
+        display: flex;
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+        margin-bottom: 50px;
+      }
+
+      div.main-content{
+      	position: relative;
+      }
+
+      /* for drawer element*/
+
+      app-toolbar {
+        background-color: #fff;
+        @apply(--font-color);
+        display: flex;
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+      }
+
+      /**
+      *
+      *
+      *
+      */
+      /*main grid data*/
+  main i{
+    font-size: 20px;
+  }
+  main{
+    @apply(--layout-horizontal);
+    @apply(--layout-wrap);
+    @apply(--layout-center-justified);
+    display: flex;
+    font-size: 14px;
+    color: #919296;
+  }
+  paper-card{
+  	display: block;
+    margin: 10px;
+    height: 314px;
+   --paper-card:{
+    width: 290px;
+   };
+   --paper-card-content:{
+      display: flex;
+      @apply(--layout-center);
+      background-color: rgba(241, 243, 242, 1.0);
+      margin: 0;
+      padding: 5px;
+      overflow: hidden;
+      hyphens: auto;
+      white-space: pre-wrap;
+      height: 60px;
+      font-size: 13px;
+      font-weight: 300;
+    };
+     --paper-card-actions:{
+      display: flex;
+      position: relative;
+      @apply(--layout-justified);
+      @apply(--layout-center);
+      font-weight: 400;
+      font-size: 14px;
+    };
+  }
+  paper-card .card-title img{
+    width: 100%;
+    height: 170px;
+  }
+  paper-card div.namePost{
+    display: flex;
+    height: 30px;
+    font-weight: 500;
+    @apply(--layout-justified);
+    overflow: hidden;
+    hyphens: auto;
+    white-space: pre-wrap;
+  }
+  paper-card div.namePost div{
+    padding: 5px 10px 5px 10px;
+  }
+  paper-card paper-button{
+    --paper-button: {
+      background-color: #3498db;
+      margin: 0;
+      color: #fff;
+      padding: 5px;
+    };
+    --paper-button-ink-color : #2ecc71;
+  }
+
+
+  /*search bar*/
+
+  form{
+      display: flex;
+      width: 100%;
+
+    }
+    input, input:focus{
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #3498db;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      font-weight: 400px;
+      font-size: 17px;
+      color: #37454d;
+      outline: none !important;
+      border-color: #3498db;
+    }
+    button[type="submit"], button[type="submit"]:focus, button[type="submit"]:hover{
+      width: 20%;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+    button .iron-submit{
+    	color: #fff;
+    }
+    .become-host, .become-host iron-icon{
+		--iron-icon-width: 54px;
+		--iron-icon-height: 54px;
+		color: #3498db;
+		position: fixed;
+		right: 5px;
+		bottom: 50px;
+
+	}
+	paper-tooltip{
+		--paper-tooltip: {
+			font-size: 14px;
+			font-weight: 300;
+		};
+		--paper-tooltip-opacity: 0.8;
+	}
+
+	/* Share*/
+	.share{
+		display: flex;
+		position: absolute;
+		z-index: 1000;
+		top: 20px;
+		right: 14%;
+
+	}
+	paper-item iron-icon{
+		margin-right: 5px;
+		color:#3498db;
+	}
+	paper-item a{
+		text-decoration: none;
+		font-size: 14px;
+	}
+	paper-item a:link{
+		text-decoration: none;
+	}
+  paper-dropdown-menu.custom {
+	--paper-dropdown-menu:{
+		@apply(--layout-center);
+		display: flex;
+		border: 1px solid #919296;
+		border-radius: 2px;
+		width: 100px;
+    	height: 30px;
+		padding: 0;
+		font-size: 14px;
+		margin: 0;
+	};
+	--paper-input-container-focus-color: none;
+	--paper-input-container-color: #919296;
+    --paper-input-container-label: {
+      @apply(--color-filter);
+      text-align: center;
+      font-size: 14px;
+    };
+    --paper-input-container-input: {
+    	font-family: 'Roboto';
+      	color: #919296;
+      	font-style: normal;
+      	font-family: 'Roboto';
+      	font-size: 14px;
+      	margin-left: 10px;
+    };
+    --paper-input-container: {
+    	color: #919296;
+    	font-family: 'Roboto';
+    };
+    --paper-input-container-disabled: {
+    	color: #919296;
+    	font-family: 'Roboto';
+    };
+    --paper-input-container-focus-color: none;
+    /* no underline */
+    --paper-input-container-underline: {
+      display: none;
+    };
+  }
+  /*footer*/
+  footer{
+      position: relative;
+      height: 140px;
+      background-color: #293339;
+      color: #fff;
+      font-weight: 300;
+      font-size: 14px;
+      @apply(--layout-horizontal);
+    }
+    footer ul:first-child{
+      padding: 5px;
+    }
+    .social ul{
+      @apply(--layout-horizontal);
+      @apply(--layout-end-justified);
+
+    }
+    footer li{
+      list-style: none;
+      margin: 10px;
+    }
+    .subfooter{
+      position: relative;;
+      bottom: 0;
+      height: 100px;
+      background-color: #37454d;
+      z-index: 4;
+      color: #fff;
+      font-weight: 300;
+      font-size: 14px;
+    }
+    .subfooter div{
+      display: flex;
+      @apply(--layout-center-justified);
+      padding-top: 10px;
+    }
+  /*media queries*/
+  @media only screen and (max-width : 480px){
+      main paper-card{
+       --paper-card:{
+        width: 290px;
+        height: 344px;
+       };
+     }
+      div.main-content{
+      	width: auto;
+      	margin: auto;
+      	background-color: #fff;
+        display: flex;
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+      }
+    }
+    @media screen and (min-width : 640px){
+    .form{
+      	display: block;
+      	width: 50%;
+      }
+    main{
+    	margin-top: 60px;
+    }
+    app-drawer{
+    	display: none;
+    }
+      main{
+        @apply(--layout-start-justified);
+      }
+      paper-item.UserDataItem, user-data{
+        display: none;
+      }
+      app-toolbar user-data{
+        display: flex;
+        @apply(--layout-end-justified);
+        padding: 0;
+        margin: 0;
+      }
+      --paper-card:{
+        width:290px;
+    }
+    .search-toolbar{
+     	display: none;
+     }
+      engine-data{
+          display: block;
+          margin: 20px 20px 0 10px;
+          z-index: 5;
+        }
+     .become-host, .become-host iron-icon{
+		--iron-icon-width: 60px;
+		--iron-icon-height: 60px;
+		color: #3498db;
+		position: fixed;
+		right: 50px;
+		bottom: 50px;
+
+	}
+	paper-tooltip{
+		--paper-tooltip: {
+			font-size: 14px;
+			font-weight: 300;
+		};
+		--paper-tooltip-opacity: 0.9;
+	}
+}
+    @media screen and (min-width : 960px){
+    .main-content{
+      	width: 1100px;
+      	display: flex;
+      	@apply(--layout-justified);
+      }
+    }
+    @media all and (min-width : 1024px){
+      main paper-card{
+        margin: 10px;
+       --paper-card:{
+        width:290px;
+        height: 344px;
+       };
+     }
+
+    }
+    @media all and (min-width : 1224px) {
+      main paper-card{
+        margin: 10px;
+       --paper-card:{
+        width:290px;
+        height: 344px;
+       };
+     }
+    }
+    @media only screen and (min-height: 768px){
+          app-drawer div.brand{
+          position: absolute;
+          bottom: 100px;
+          margin-bottom: 15px;
+        }
+
+        app-drawer div.social{
+          position: absolute;
+          bottom: 180px;
+          right: 25px;
+          margin-bottom: 15px;
+        }
+    }
+
+
+    </style>
+
+   <app-drawer-layout>
+
+    <app-drawer>
+    </app-drawer>
+
+    <app-header-layout>
+
+      <app-header reveals shadow>
+       <!-- <paper-icon-button icon="menu" drawer-toggle></paper-icon-button> -->
+        <app-toolbar class="normalize-toolbar">
+          <div><img src="../images/favicon/favicon_any2.png"/></div>
+          <div class="form">
+          	<form>
+		      <input value="{{myValue::input}}" placeholder="Enter your city">
+		      <button type="submit"><iron-icon icon="search" color="#fff"></iron-icon></button>
+		    </form>
+          </div>
+          <div class="app-toolbar-hoster"><user-data></user-data></div>
+        </app-toolbar>
+        <app-toolbar class="search-toolbar">
+            <form>
+		      <input value="{{myValue::input}}" placeholder="Enter your city">
+		      <button type="submit"><iron-icon icon="search" color="#fff"></iron-icon></button>
+		    </form>
+        </app-toolbar>
+      </app-header>
+
+      <div class="main-content">
+      	<engine-data></engine-data>
+      	<div class="main-doc">
+      	<div class="share">
+      		<paper-dropdown-menu class="custom" label="Share" no-label-float>
+    			  <paper-listbox class="dropdown-content">
+    			    <paper-item><a href="#/"><iron-icon icon="mdi:facebook-box"></iron-icon> Facebook</a></paper-item>
+    			    <paper-item><a href="#/"><iron-icon icon="mdi:twitter-box"></iron-icon> Twitter</a></paper-item>
+    			    <paper-item><a href="#/"><iron-icon icon="mdi:google-plus-box"></iron-icon> Google</a></paper-item>
+    			    <paper-item><a href="#/"><iron-icon icon="mdi:email"></iron-icon> Email</a></paper-item>
+    			    <paper-item><a href="#/"><iron-icon icon="mdi:link-variant"></iron-icon> Link</a></paper-item>
+    			  </paper-listbox>
+    			</paper-dropdown-menu>
+      	</div>
+	    <main>
+	      <template is="dom-repeat" items="{{grids}}" index-as="index">
+	        <paper-card>
+		          <div class="card-title">
+		            <img src="{{item.img}}">
+		          </div>
+		          <div class="namePost">
+		            <div>{{item.name}}</div>
+		            <div><iron-icon icon="social:share"></iron-icon></div>
+		          </div>
+		          <div class="card-content"><span>{{item.address}}</span></div>
+		          <div class="card-actions">
+		            <div class="pricing">{{item.price}} {{item.currency}} / night</div>
+		            <paper-button raised>{{book}}</paper-button>
+		        </paper-card>
+	        </template>
+	        <a href="#/" class="become-host"><iron-icon icon="add-circle" class="circle" id="dir_3"></iron-icon></a>
+	        <paper-tooltip for="dir_3" position="top" animation-delay="1s">Become Host</paper-tooltip>
+	      </main>
+	      </div>
+      </div>
+    </div>
+
+    </app-header-layout>
+
+  </app-drawer-layout>
+  	<footer>
+        <ul>
+          <li>About</li>
+          <li>Discover</li>
+          <li>Hosting</li>
+          <li>Terms & Privacy</li>
+        </ul>
+      <div class="social">
+        <ul>
+          <li><a href="/"><iron-icon icon="mdi:facebook"></iron-icon></a></li>
+          <li><a href="/"><iron-icon icon="mdi:twitter"></iron-icon></a></li>
+          <li><a href="/"><iron-icon icon="mdi:vk"></iron-icon></a></li>
+        </ul>
+      </div>
+    </footer>
+    <div class="subfooter">
+      <div>
+        <img src="../images/favicon/favicon_any2.png"/>
+      </div>
+      <div>Copyright 2016, Laxis | All rights reserved.</div>
+    </div>
 
   </template>
+
+  <script>
+    Polymer({
+
+      is: 'main-app',
+
+      properties: {
+        address: {
+          type: String,
+          value: 'Mr S Tan 200 Broadway Av WEST BEACH HORMAHEB HSHSF SIOA SA 5024 AUSTRALIA'
+        },
+        book: {
+          type: String,
+          value: 'BOOK NOW'
+        }
+      },
+      ready: function(){
+      	this.grids = [
+      	{
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/0d20d386_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/68f92799_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/439b54b4_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/0766c5e8_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/bf079c42_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/ccabaf77_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/d2aec549_original.jpg",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/superbe.png",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}, {
+      		name: "Brooklin",
+            email: "scott@gmail.com",
+            img: "images/content/superbe.png",
+            price: "1000",
+            currency: "‎£",
+            address: "An address is regarded as complete when it contains all the elements needed for ... SAN JUAN PR 00926–0221. UNITED STATES OF AMERICA."
+      	}]
+      }
+
+    });
+  </script>
 </dom-module>

@@ -1,0 +1,45 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="search-bar">
+	<template>
+	<style is="custom-style" include="iron-flex iron-flex-alignment">
+	form{
+      display: flex;
+      position: relative;
+      @apply(--layout-center-justified);
+      width: 80%;
+
+    }
+    input, input:focus{
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #3498db;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      font-weight: 400px;
+      font-size: 17px;
+      color: #37454d;
+      outline: none !important;
+      border-color: #3498db;
+    }
+    button[type="submit"], button[type="submit"]:focus, button[type="submit"]:hover{
+      width: 20%;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+    button .iron-submit{
+    	color: #fff;
+    }
+	</style>
+	<form>
+      <input value="{{myValue::input}}" placeholder="Enter your city">
+      <button type="submit"><iron-icon icon="search" color="#fff"></iron-icon></button>
+    </form>
+	</template>
+	<script>
+		Polymer({
+			is: 'search-bar',
+		});
+	</script>
+</dom-module>

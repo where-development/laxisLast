@@ -1,0 +1,713 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="../../bower_components/iron-iconset/iron-iconset.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="costum-icons.html">
+<link rel="import" href="grid-data.html">
+<link rel="import" href="user-data.html">
+<link rel="import" href="engine-data.html">
+<link rel="import" href="become-host.html">
+
+
+<dom-module id="where-app">
+  <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+    /* for main element - mobile first*/
+      :host{
+        font-family: 'Roboto', 'Century Gothic';
+        --font-color: {
+          color:#fff;
+          font-family: 'Roboto';
+          font-weight: 200;
+          font-size: 13px;
+        };
+      }
+      /*for engine-data to hide element*/
+      engine-data{
+        display: none;
+      }
+      a{
+        text-decoration : none;
+      }
+      .app-toolbar-hoster{
+        display:flex;
+        @apply(--layout-end-justified);
+        position: relative;
+        left:5%;
+      }
+
+      div.main-content{
+        display: flex;
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+      }
+
+      app-toolbar user-data{
+        display: none;
+      }
+      /* for drawer element*/
+      app-drawer {
+        @apply(--font-color);
+        --app-drawer-content-container: {
+          box-shadow: 1px 0 2px 1px rgba(0,0,0,0.18);
+          background-color: rgba(53,57,66,1.0);
+
+        }
+        --app-drawer-scrim-background: rgba(53, 57, 66, 0.5);
+        --app-drawer-width: 140px;
+      }
+      app-drawer app-toolbar {
+        background-color: #2babb4;
+        height: 100px;
+        color: #fff;
+      }
+      app-toolbar {
+        background-color: rgba(53,57,66,1.0);
+        @apply(--font-color);
+      }
+      /*app drawer styling*/
+      app-drawer ul{
+        list-style: none;
+      }
+      app-drawer ul img{
+        width: 120px;
+        height: auto;
+      }
+      div.title_get-app{
+        display: flex;
+        @apply(--layout-center-justified);
+        position: relative;
+        margin-top: 20px;
+        text-transform: uppercase;
+      }
+      /*paper-iten et iron icon configuration*/
+      paper-item{
+        --paper-item: {
+          height: 38px;
+          @apply(--font-color);
+          border-bottom: 1px solid rgba(44,48,57,1.0);
+          box-shadow: 1px 0 1px 0.5px rgba(0,0,0,0.18);
+        };
+      }
+      paper-item a{
+        @apply(--font-color);
+        text-decoration: none;
+      }
+      paper-item user-data{
+        display: flex;
+        @apply(--layout-center);
+        text-overflow: ellipsis;
+      }
+      iron-icon, i{
+        font-size: 22px;
+        @apply(--layout-center);
+        --iron-icon-fill-color: #c1c6cc;
+        --iron-icon-width: 22px;
+        --iron-icon-height: 22px;
+        margin-right: 5px;
+
+      }
+
+       div.get-app{
+        position: relative;
+        left: -30px;
+        margin-bottom: 30px;
+      }
+      /*social medias*/
+      app-drawer div.social{
+        position: relative;
+        left: -40px;
+      }
+      div.social ul{
+        display: flex;
+        apply(--layout-horizontal);
+      }
+      div.social li{
+        margin: 20px;
+      }
+      div.social i{
+        background-color: #2babb4;
+        font-size: 18px;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        @apply(--layout-center-justified);
+        @apply(--layout-center);
+        border: 0 solid rgba(53,57,66,1.0);
+        padding: 5px;
+        border-radius: 50%;
+      }
+      div.social i:hover{
+        background-color: transparent;
+        border: 1px solid #fff;
+      }
+      /*brand styling*/
+      app-drawer div.brand{
+        font-size: 14px;
+        font-weight: 300;
+        padding-left: 10px;
+      }
+      /**
+      *
+      *
+      *
+      */
+      /*main grid data*/
+  main i{
+    font-size: 20px;
+  }
+  main{
+    @apply(--layout-horizontal);
+    @apply(--layout-wrap);
+    @apply(--layout-center-justified);
+    display: flex;
+    font-size: 14px;
+    color: #919296;
+  }
+  main paper-card{
+    margin: 10px;
+    height: 314px;
+   --paper-card:{
+    width: 45%;
+   }; 
+   --paper-card-content:{
+      display: flex;
+      @apply(--layout-center);
+      background-color: rgba(241, 243, 242, 1.0);
+      margin: 0;
+      padding: 5px;
+      overflow: hidden;
+      hyphens: auto;
+      white-space: pre-wrap;
+      height: 60px;
+      font-size: 12px;
+      font-weight: 300;
+    };
+     --paper-card-actions:{
+      display: flex;
+      position: relative;
+      @apply(--layout-justified);
+      @apply(--layout-center);
+      font-weight: 500;
+    };
+  }
+  main paper-card .card-title img{
+    width: 100%;
+    height: 170px;
+  }
+  main paper-card div.namePost{
+    display: flex;
+    height: 30px;
+    font-weight: 500;
+    @apply(--layout-justified);
+    overflow: hidden;
+    hyphens: auto;
+    white-space: pre-wrap;
+  }
+  main paper-card div.namePost div{
+    padding: 5px 10px 5px 10px;
+  }
+  main paper-card paper-button{  
+    --paper-button: {
+      background-color: #2babb4;
+      margin: 0;
+      color: #fff;
+      padding: 5px;
+    };
+    --paper-button-ink-color : #2babb4;
+  }
+
+  /**
+  *
+  *
+  */
+
+  /*media queries*/
+  @media only screen and (max-device-width : 480px){
+    main paper-card{
+     --paper-card:{
+      width: 80%;
+      height: 344px;
+     }; 
+   }
+  }
+  @media screen and (min-width : 640px){
+    paper-item.UserDataItem, user-data{
+      display: none;
+    }
+    app-toolbar user-data{
+      display: flex;
+      @apply(--layout-end-justified);
+      padding: 0;
+      margin: 0;
+    }
+  }
+  @media all and (min-width : 1024px){
+    main paper-card{
+      margin: 10px;
+     --paper-card:{
+      width: 30%;
+      height: 344px;
+     }; 
+   }
+   engine-data{
+        display: flex;
+      }
+  }
+  @media all and (min-width : 1224px) {
+    main paper-card{
+      margin: 10px;
+     --paper-card:{
+      width: 30%;
+      height: 344px;
+     }; 
+   }
+  }
+  @media only screen and (min-height: 768px){
+        app-drawer div.brand{
+        position: absolute;
+        bottom: 100px;
+        margin-bottom: 15px;     
+      }
+    
+      app-drawer div.social{
+        position: absolute;
+        bottom: 180px;
+        right: 25px;
+        margin-bottom: 15px;
+      }
+  }
+
+    </style>
+
+   <app-drawer-layout force-narrow>
+
+    <app-drawer>
+      <app-toolbar>
+      </app-toolbar>
+
+      <div>
+        <a href="#"><paper-item><iron-icon icon="search"></iron-icon>SEARCH</paper-item></a>
+        <a href="#"><paper-item><iron-icon icon="favorite-border"></iron-icon>FAVORITE</paper-item></a>
+        <a href="#"><paper-item><iron-icon icon="account-balance-wallet"></iron-icon>CURRENCY</paper-item></a>
+        <a href="#"><paper-item><iron-icon icon="language"></iron-icon>LANGUAGE</paper-item></a>
+        <a href="#"><paper-item><iron-icon icon="more-horiz"></iron-icon> MORES</paper-item></a>
+        <paper-item class="UserDataItem"><user-data></user-data></paper-item>
+      </div>
+      <div class="title_get-app">Get App</div>
+      <div class="get-app">
+        <ul>
+          <li><img src="../images/play-store-badge_en.png"></li>
+          <li><img src="../images/app-store-badge_en.png"></li>
+        </ul>
+      </div>
+
+      <div class="social">
+        <ul>
+          <li><a><i class="ion-social-twitter"></i></a></li>
+          <li><a><i class="ion-social-facebook"></i></a></li>
+          <li><a><i class="ion-social-youtube"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="brand">
+        <p>Where, Inc.<br>Copyright 2016 |<br>All right reserved</p>
+      </div>
+
+    </app-drawer>
+    
+
+    <app-header-layout>
+
+      <app-header fixed shadow>
+        <app-toolbar>
+          <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+          <div main-title></div>
+          <div class="app-toolbar-hoster"><become-host></become-host><user-data></user-data></div>
+        </app-toolbar>
+      </app-header>
+      <div class="main-content">
+
+        <main>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/0d20d386_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/68f92799_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/439b54b4_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card><paper-card>
+          <div class="card-title">
+            <img src="../images/0766c5e8_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/bf079c42_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/ccabaf77_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/d2aec549_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/superbe.png">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/0d20d386_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/68f92799_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/439b54b4_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card><paper-card>
+          <div class="card-title">
+            <img src="../images/0766c5e8_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/bf079c42_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/ccabaf77_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/d2aec549_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/superbe.png">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/0d20d386_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/68f92799_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/439b54b4_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card><paper-card>
+          <div class="card-title">
+            <img src="../images/0766c5e8_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/bf079c42_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/ccabaf77_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/d2aec549_original.jpg">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        <paper-card>
+          <div class="card-title">
+            <img src="../images/superbe.png">
+          </div>
+          <div class="namePost">
+            <div>Name's house</div>
+            <div><i class="ion-android-share-alt"></i></div>
+          </div>
+          <div class="card-content"><span>{{address}}</span></div>
+          <div class="card-actions">
+            <div class="pricing">1000p/night</div>
+            <paper-button raised>{{book}}</paper-button>
+          </div>
+        </paper-card>
+        </main>
+        <engine-data></engine-data>
+      </div>
+
+    </app-header-layout>
+
+  </app-drawer-layout>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'where-app',
+
+      properties: {
+        address: {
+          type: String,
+          value: 'Mr S Tan 200 Broadway Av WEST BEACH HORMAHEB HSHSF SIOA SA 5024 AUSTRALIA'
+        },
+        book: {
+          type: String,
+          value: 'BOOK'
+        }
+      },
+
+    });
+  </script>
+</dom-module>

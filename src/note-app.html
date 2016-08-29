@@ -1,0 +1,59 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
+
+<dom-module id="note-app">
+  <template>
+  <style>
+ /* local styles go here */
+ :host {
+   display: inline-block;
+   font-family: sans-serif;
+        --icon-toggle-color: lightgrey;
+        --icon-toggle-outline-color: black;
+        --icon-toggle-pressed-color: red;
+        --iron-icon-width: 40px;
+      --iron-icon-height: 40px;
+ }
+ iron-icon {
+   fill: var(--icon-toggle-color, rgba(0,0,0,0));
+   stroke: var(--icon-toggle-outline-color, currentcolor);
+   --iron-icon-width: 40px;
+    --iron-icon-height: 40px;
+ }
+ :host([pressed]) iron-icon {
+   fill: var(--icon-toggle-pressed-color, currentcolor);
+ }
+</style>
+    <iron-icon icon="[[toggleIcon]]">
+    </iron-icon>
+    <icon-toggle toggle-icon="star" pressed></icon-toggle>
+    <div>
+      Hello world
+    </div>
+    <iron-icon icon="polymer">
+    </iron-icon>
+  </template>
+
+  <script>
+  Polymer({
+      /* this is the element's prototype */
+      is: 'note-app',
+      properties: {
+      toggleIcon: String,
+      pressed: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        reflectToAttribute: true
+      }
+    },
+    listeners: {
+      'tap': 'toggle'
+    },
+    toggle: function() {
+      this.pressed = !this.pressed;
+    },
+    });
+  </script>
+</dom-module>

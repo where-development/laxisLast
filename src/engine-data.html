@@ -1,0 +1,280 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../mdi/mdi.html">
+
+<dom-module id="engine-data">
+	<template>
+
+	<style is="custom-style" include="iron-flex iron-flex-alignment">
+
+	:host{
+		--color-filter: {color: #919296;}
+		--my-background: {background-color: #3498db;}
+	}
+
+	i{
+		font-size: 16px;
+	}
+
+	main{
+		display:flex;
+		width: 240px;
+		background-color: #fff;
+		@apply(--color-filter);
+		font-size: 15px;
+		box-shadow: 0 1px 2px 1px rgba(0,0,0,0.18);
+		font-family: 'Roboto';
+	}
+	main div{
+		display: flex;
+		@apply(--layout-vertical);
+		@apply(--color-filter);
+	}
+	main div .priority, .price, .room-type, .size, .amneties, .propertyType{
+		margin: 10px;
+		@apply(--color-filter);
+		font-family: 'Roboto';
+	}
+	main div.titleFilter{
+		@apply(--my-background);
+		color: #fff;
+		width: 240px;
+		display: block;
+	}
+	main div.titleFilter h4{
+		display: flex;
+		@apply(--layout-center-justified);
+		font-weight: 400;
+	}
+
+	main div.titleFilter h4 span{
+		margin-right: 10px;
+	}
+
+	ul.paper-drop-menu{
+		display: flex;
+		@apply(--layout-horizontal);
+		@apply(--layout-wrap);
+		margin: 3px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+	}
+	ul.paper-drop-menu li{
+		margin: 3px;
+	}
+
+	paper-dropdown-menu {
+	--paper-dropdown-menu:{
+		border: 2px solid #919296;
+		border-radius: 2px;
+		width: 100px;
+		padding: 0;
+		font-size: 16px;
+	};
+	--paper-input-container-focus-color: none;
+	--paper-input-container-color: #919296;
+    --paper-input-container-label: {
+      @apply(--color-filter);
+      text-align: center;
+      font-size: 14px;
+    };
+    --paper-input-container-input: {
+    	font-family: 'Roboto';
+      	color: #919296;
+      	font-style: normal;
+      	font-family: 'Roboto';
+      	font-size: 14px;
+      	text-transform: uppercase;
+      	margin-left: 10px;
+    };
+    --paper-input-container: {
+    	color: #919296;
+    	font-family: 'Roboto';
+    };
+    --paper-input-container-disabled: {
+    	color: #919296;
+    	font-family: 'Roboto';
+    };
+    --paper-input-container-focus-color: none;
+    /* no underline */
+    --paper-input-container-underline: {
+      display: none;
+    };
+  }
+  	paper-checkbox{
+  		margin-top: 5px;
+  		--paper-checkbox-unchecked-color: #919296;
+  		--paper-checkbox-checked-color: #3498db;
+    	--paper-checkbox-label-color: #919296;
+    	--paper-checkbox-size:15px;
+    	--paper-slider-knob-color:#3498db;
+    }
+    paper-slider{
+    	margin-top: 25px;
+    	--paper-slider-active-color:#3498db;
+    	--paper-slider-container-color:#3498db;
+    	 --paper-slider-knob-color: #3498db;
+    	 --paper-slider-pin-start-color: #3498db;
+    	 --paper-slider-pin-color: #3498db;
+    }
+    paper-radio-button{
+    	--paper-radio-button-unchecked-color: #919296;
+    	--paper-radio-button-checked-color: #3498db;
+       	--paper-radio-button-label-color: #919296;
+    }
+    paper-radio-group{
+    	--paper-radio-group-item-padding: 5px;
+    }
+    .fistName{
+    	font-weight: 500;
+    	font-size: 14px;
+    	display: flex;
+    	@apply(--layout-horizontal);
+    	@apply(--layout-justified);
+    }
+    .propertyType iron-collapse, .amneties iron-collapse{
+    	display: flex;
+    	@apply(--layout-vertical);
+    }
+    .hr{
+    	width: 80%;
+    	padding: 0;
+    	margin: 0 15px;
+		background-color: #919296;
+		height: 1px;
+		opacity: 0.5;
+    }
+
+
+	</style>
+	<main>
+		<div>
+			<div class="titleFilter"><h4><span>TOP FILTERS</span><iron-icon icon="mdi:filter-variant"></iron-icon></h4></div>
+			<div class="priority">
+				<div class="fistName" on-tap="toggle1"><div>PRIORITY</div><div><iron-icon icon=":chevron-right"></iron-icon></div></div>
+				<iron-collapse id="collapse1">
+					<paper-checkbox>Around me</paper-checkbox>
+					<paper-checkbox>Available offers</paper-checkbox>
+					<paper-checkbox>Offer occupied</paper-checkbox>
+				</iron-collapse>
+			</div>
+			<div class="hr"></div>
+			<div class="price">
+				<div class="fistName" on-tap="toggle2"><div>PRICE</div><div><iron-icon icon=":chevron-right"></iron-icon></div></div>
+				<iron-collapse id="collapse2">
+					<paper-slider pin value="20"></paper-slider>
+				</iron-collapse>
+			</div>
+			<div class="hr"></div>
+			<div class="room-type">
+				<div class="fistName" on-tap="toggle3"><div>ROOM TYPE</div><div><iron-icon icon=":chevron-right"></iron-icon></div></div>
+				<iron-collapse id="collapse3">
+					<paper-radio-group selected="a" aria-labelledby="_room-type">
+					  <paper-radio-button name="a">Entire Home</paper-radio-button>
+					  <paper-radio-button name="b">Private Room</paper-radio-button>
+					  <paper-radio-button name="c">Shared Room</paper-radio-button>
+					</paper-radio-group>
+				</iron-collapse>
+			</div>
+			<div class="hr"></div>
+			<div class="size">
+				<div class="fistName" on-tap="toggle4"><div>SIZE</div><div><iron-icon icon=":chevron-right"></iron-icon></div></div>
+				<iron-collapse id="collapse4">
+					<ul class="paper-drop-menu">
+						<li>
+						<paper-dropdown-menu class="bedrooms" label="Bedroom" no-label-float>
+						  <paper-listbox class="dropdown-content">
+						    <paper-item>1</paper-item>
+						    <paper-item>2</paper-item>
+						    <paper-item>3</paper-item>
+						    <paper-item>4</paper-item>
+						    <paper-item>5</paper-item>
+						  </paper-listbox>
+						</paper-dropdown-menu>
+						</li>
+						<li>
+						<paper-dropdown-menu class="bathrooms" label="Bathrooms" no-label-float>
+						  <paper-listbox class="dropdown-content">
+						    <paper-item>1</paper-item>
+						    <paper-item>2</paper-item>
+						    <paper-item>3</paper-item>
+						    <paper-item>4</paper-item>
+						    <paper-item>5</paper-item>
+						  </paper-listbox>
+						</paper-dropdown-menu>
+						</li>
+						<li>
+						<paper-dropdown-menu class="beds" label="Beds" no-label-float>
+						  <paper-listbox class="dropdown-content">
+						    <paper-item>1</paper-item>
+						    <paper-item>2</paper-item>
+						    <paper-item>3</paper-item>
+						    <paper-item>4</paper-item>
+						    <paper-item>5</paper-item>
+						  </paper-listbox>
+						</paper-dropdown-menu>
+						</li>
+					</ul>
+				</iron-collapse>
+			</div>
+			<div class="hr"></div>
+			<div class="amneties">
+			<div class="fistName" on-tap="toggle5"><div>AMENTIES</div><div><iron-icon icon=":chevron-right"></iron-icon></div></div>
+				<iron-collapse id="collapse5">
+					<paper-checkbox>WI-FI</paper-checkbox>
+					<paper-checkbox>Kitchen</paper-checkbox>
+					<paper-checkbox>Air Conditioning</paper-checkbox>
+				</iron-collapse>
+			</div>
+			<div class="hr"></div>
+			<div class="propertyType">
+				<div class="fistName" on-tap="toggle6"><div>PROPERTY TYPE</div><div><iron-icon icon=":chevron-right"></iron-icon></div></div>
+				<iron-collapse id="collapse6">
+					<paper-checkbox>Apartement</paper-checkbox>
+					<paper-checkbox>House</paper-checkbox>
+					<paper-checkbox>Villa</paper-checkbox>
+					<paper-checkbox>Townhouse</paper-checkbox>
+					<paper-checkbox>Dorm</paper-checkbox>
+					<paper-checkbox>Other</paper-checkbox>
+				</iron-collapse>
+			</div>
+	</main>
+	</template>
+	<script>
+		Polymer({
+			is: 'engine-data',
+			toggle1: function() {
+			  this.$.collapse1.toggle();
+			},
+			toggle2: function() {
+			  this.$.collapse2.toggle();
+			},
+			toggle3: function() {
+			  this.$.collapse3.toggle();
+			},
+			toggle4: function() {
+			  this.$.collapse4.toggle();
+			},
+			toggle5: function() {
+			  this.$.collapse5.toggle();
+			},
+			toggle6: function() {
+			  this.$.collapse6.toggle();
+			}
+		});
+	</script>
+</dom-module>

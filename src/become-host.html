@@ -1,0 +1,43 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="become-host">
+	<template>
+	
+	<style is="custom-style" include="iron-flex iron-flex-alignment">
+
+	.usermain{
+		display: flex;
+		font-weight: 200;
+		font-size: 14px;
+		@apply(--layout-horizontal);
+	}
+	.usermain .become_host{
+		margin-right: 10px;
+	}
+	paper-button{
+		--paper-button: {
+			background-color: #3498db;
+			color: #fff;
+			padding: 10px;
+		};
+	}
+		
+	</style>
+
+	<div class="usermain">
+		<div class="become_host"><paper-button raised>Become Host</paper-button></div>
+	</div>
+
+	</template>
+	<script>
+		Polymer({
+			is: 'become-host',
+			properties: {
+			},
+		});
+	</script>
+</dom-module>
