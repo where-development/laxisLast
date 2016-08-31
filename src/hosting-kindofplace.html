@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="hosting-kindofplace">
+<template>
+<style include="hosting-shared-styles">
+	:host {
+        display: block;
+        padding: 10px;
+      }
+</style>
+
+	<div id="general" class="form">
+					<form method="get" action="/" id="basic">
+							<h2>What kind of place are you listing?</h2>
+							<div>
+								<paper-item> <paper-radio-button name="a">Entire home</paper-radio-button></paper-item>
+								<paper-item> <paper-radio-button name="b">Private room</paper-radio-button></paper-item>
+								<paper-item> <paper-radio-button name="c">Shared room</paper-radio-button></paper-item>
+							</div>
+							<h3>What type of property is this</h3>
+							<paper-dropdown-menu class="bedrooms" label="Bedroom" no-label-float>
+							  <paper-listbox class="dropdown-content">
+							    <paper-item>Apartement</paper-item>
+							    <paper-item>House</paper-item>
+							    <paper-item>Villa</paper-item>
+							    <paper-item>Townhouse</paper-item>
+							    <paper-item>Dorm</paper-item>
+							    <paper-item>Guesthouse</paper-item>
+							    <paper-item>Entire Floor</paper-item>
+							    <paper-item>Bed &amp; Breakfast</paper-item>
+							    <paper-item>Condominium</paper-item>
+							    <paper-item>Cabin</paper-item>
+							    <paper-item>Loft</paper-item>
+							  </paper-listbox>
+							</paper-dropdown-menu>
+						</div>
+						<div class="mybacknext">
+							<paper-button><iron-icon icon="arrow-back"></iron-icon>  Back</paper-button>
+							<paper-button>Next  <iron-icon icon="arrow-forward"></iron-icon></paper-button>
+						</div>
+					</form>
+				</div>
+
+</template>
+<script>
+	Polymer({
+		is: 'hosting-kindofplace',
+	})
+</script>
+</dom-module>

@@ -1,0 +1,137 @@
+<link rel="import"  href="../../bower_components/polymer/polymer.html">
+
+
+<!-- shared styles for all views -->
+<dom-module id="hosting-shared-styles">
+  <template>
+    <style>
+    paper-dropdown-menu{
+    --paper-dropdown-menu:{
+      @apply(--layout-center);
+      display: flex;
+      border: 2px solid #919296;
+      border-radius: 2px;
+      width: 200px;
+        height: 30px;
+      font-size: 14px;
+      margin: 0;
+    };
+    --paper-input-container-focus-color: none;
+    --paper-input-container-color: #919296;
+      --paper-input-container-label: {
+        @apply(--color-filter);
+        text-align: center;
+        font-size: 14px;
+      };
+      --paper-input-container-input: {
+        font-family: 'Roboto';
+          color: #919296;
+          font-style: normal;
+          font-family: 'Roboto';
+          font-size: 14px;
+          margin-left: 10px;
+          width: 150px;
+      };
+      --paper-input-container: {
+        color: #919296;
+        font-family: 'Roboto';
+        width: auto;
+      };
+      --paper-input-container-disabled: {
+        color: #919296;
+        font-family: 'Roboto';
+      };
+      --paper-input-container-focus-color: none;
+      /* no underline */
+      --paper-input-container-underline: {
+        display: none;
+      };
+    }
+    label{
+      font-weight: 300;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .hr{
+        width: 80%;
+        padding: 0;
+        margin: 0 15px;
+      background-color: #919296;
+      height: 1px;
+      opacity: 0.5;
+      }
+      input, input:focus{
+        width: 60%;
+        padding: 10px;
+        border: 2px solid #919296;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        font-weight: 400px;
+        font-size: 16px;
+        color: #919296;
+        outline: none !important;
+        border-color: #919296;
+        margin-top: 10px;
+      }
+      button[type="submit"], button[type="submit"]:focus, button[type="submit"]:hover{
+        width: 20%;
+        background-color: #2ecc71;
+        color: #fff;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      .my-input{
+        display: flex;
+        @apply(--layout-vertical);
+        padding: 5px;
+      }
+      .paper{
+        margin-top: 20px;
+      }
+      paper-button{
+        --paper-button:{
+          background-color: #3498db;
+          color: #fff;
+          font-weight: 400;
+        }
+      }
+      .my-amneties paper-checkbox{
+        display: flex;
+        @appl(--layout-vertical);
+        margin-bottom:  10px;
+      }
+      paper-checkbox{
+    		margin-top: 5px;
+        font-size: 15px;
+    		--paper-checkbox-unchecked-color: #919296;
+    		--paper-checkbox-checked-color: #3498db;
+      	--paper-checkbox-label-color: #919296;
+      	--paper-checkbox-size:15px;
+      	--paper-slider-knob-color:#3498db;
+      }
+      paper-radio-button{
+    	--paper-radio-button-unchecked-color: #919296;
+    	--paper-radio-button-checked-color: #3498db;
+    	--paper-radio-button-label-color: #919296;
+    }
+    .mybacknext{
+      margin: 50px 20px 20px 0;
+      display: flex;
+      @apply(--layout-center);
+      @apply(--layout-justified);
+    }
+    iron-autogrow-textarea{
+      --iron-autogrow-textarea:{
+        padding: 5px;
+      }
+    }
+    </style>
+
+  </template>
+  <script>
+  Polymer({
+    is: "hosting-shared-styles",
+
+  });
+  </script>
+</dom-module>

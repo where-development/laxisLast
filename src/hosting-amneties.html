@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/iron-iconset/iron-iconset.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="hosting-shared-styles.html">
+
+<dom-module id="hosting-amneties">
+<template>
+<style include="hosting-shared-styles">
+	:host {
+        display: block;
+        padding: 10px;
+      }
+</style>
+
+	<div id="general" class="form">
+					<form is="iron-form" method="get" action="/" id="basic" class="my-amneties">
+						<h2>What amenities do you offer?</h2>
+					  	<paper-checkbox>Essentials Towels, bed sheets, soap, and toilet paper</paper-checkbox>
+						<paper-checkbox>Wifi </paper-checkbox>
+						<paper-checkbox>Shampoo </paper-checkbox>
+						<paper-checkbox>Closet/drawers </paper-checkbox>
+						<paper-checkbox>TV </paper-checkbox>
+						<paper-checkbox>Heat</paper-checkbox>
+						<paper-checkbox>Air conditioning </paper-checkbox>
+						<paper-checkbox>Breakfast, coffee, tea</paper-checkbox>
+						<paper-checkbox>Desk/workspace </paper-checkbox>
+						<paper-checkbox>Fireplace</paper-checkbox>
+						<paper-checkbox>Iron </paper-checkbox>
+						<paper-checkbox>Hair dryer </paper-checkbox>
+						<paper-checkbox>Pets in the house</paper-checkbox>
+						<h2>Safety amenities</h2>
+						<paper-checkbox>Smoke detector</paper-checkbox>
+						<paper-checkbox>Carbon monoxide detector</paper-checkbox>
+						<paper-checkbox>First aid kit </paper-checkbox>
+						<paper-checkbox>Safety card</paper-checkbox>
+						<paper-checkbox>Fire extinguisher </paper-checkbox>
+						<paper-checkbox>Lock on bedroom door  </paper-checkbox>
+						<div class="mybacknext">
+							<paper-button><iron-icon icon="arrow-back"></iron-icon>  Back</paper-button>
+							<paper-button>Next  <iron-icon icon="arrow-forward"></iron-icon></paper-button>
+						</div>
+					</form>
+				</div>
+</template>
+<script>
+	Polymer({
+		is: 'hosting-amneties',
+	})
+</script>
+</dom-module>

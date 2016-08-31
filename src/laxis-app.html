@@ -25,10 +25,13 @@
   <template>
     <style is="custom-style" include="iron-flex iron-flex-alignment">
     /* for main element - mobile first*/
+    *{
+      box-sizing: border-box;
+    }
     :host{
       --my-text: {
         font-weight:400;
-        color: #2ecc71;
+        color: #3498db;
         font-size: 20px;
       }
     }
@@ -36,7 +39,7 @@
       height: 100vh;
     }
     app-toolbar {
-      background-color: #2ecc71;
+      background-color: #3498db;
       color: #fff;
     }
     app-drawer {
@@ -56,11 +59,15 @@
     main{
       @apply(--my-text);
       @apply(--layout-vertical);
-      @apply(--layout-center-justified);
       text-align: center;
       position: relative;
       top: 70px;
       padding: 25px;
+    }
+    main .intro{
+      display: flex;
+      position: relative;
+      @apply(--layout-center-justified);
     }
     form{
       display: flex;
@@ -69,19 +76,19 @@
       @apply(--layout-center-justified);
     }
     input, input:focus{
-      width: 60%;
+      width: 70%;
       padding: 10px;
-      border: 1px solid #2ecc71;
+      border: 1px solid #3498db;
       font-family: 'Roboto', 'Noto', sans-serif;
       font-weight: 400px;
       font-size: 16px;
       color: #37454d;
       outline: none !important;
-      border-color: #2ecc71;
+      border-color: #3498db;
     }
     button[type="submit"], button[type="submit"]:focus, button[type="submit"]:hover{
       width: 20%;
-      background-color: #2ecc71;
+      background-color: #3498db;
       color: #fff;
       border: none;
       outline: none;
@@ -95,6 +102,8 @@
       font-weight: 300;
       font-size: 14px;
       @apply(--layout-horizontal);
+      @apply(--layout-justified);
+      display: flex;
     }
     footer ul:first-child{
       padding: 5px;
@@ -111,29 +120,45 @@
     .subfooter{
       position: relative;;
       bottom: 0;
-      height: 100px;
-      background-color: #2ecc71;
+      height: 80px;
+      background-color: #3498db;
       z-index: 4;
       color: #fff;
       font-weight: 300;
       font-size: 14px;
     }
-    .subfooter div{
+    .subfooter div, .subfooter div img{
       display: flex;
       @apply(--layout-center-justified);
-      padding-top: 10px;
+      padding-top: 5px;
     }
     a{
         text-decoration: none;
         color: #fff;
     }
     div.social li{
-        background-color: #2ecc71;
+        background-color: #3498db;
         font-size: 18px;
         border: 0 solid rgba(53,57,66,1.0);
         padding: 5px;
         border-radius: 50%;
       }
+    @media screen and (min-width : 640px){
+      input, input:focus{
+        width: 60%;
+      }
+      button[type="submit"], button[type="submit"]:focus, button[type="submit"]:hover{
+        width: 10%;
+      }
+    }
+    @media screen and (min-width : 960px){
+      input, input:focus{
+        width: 40%;
+      }
+      button[type="submit"], button[type="submit"]:focus, button[type="submit"]:hover{
+        width: 10%;
+      }
+    }
 
 
     </style>
@@ -164,12 +189,15 @@
     </app-header-layout>
   </app-drawer-layout>
     <footer>
+      <div class="list">
         <ul>
           <li>About</li>
           <li>Discover</li>
           <li>Hosting</li>
           <li>Terms & Privacy</li>
         </ul>
+      </div>
+
       <div class="social">
         <ul>
           <li><a href="/"><iron-icon icon="mdi:facebook"></iron-icon></a></li>
@@ -186,6 +214,7 @@
     </div>
   </template>
 
+  <script src="js/load-image.all.min.js"></script>
   <script>
     Polymer({
       is: 'laxis-app',

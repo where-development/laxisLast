@@ -1,43 +1,168 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/iron-iconset/iron-iconset.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="hosting-shared-styles.html">
 
-<dom-module id="become-host">
+<dom-module id="become-host" include="hosting-shared-styles">
 	<template>
-	
-	<style is="custom-style" include="iron-flex iron-flex-alignment">
-
-	.usermain{
-		display: flex;
-		font-weight: 200;
-		font-size: 14px;
-		@apply(--layout-horizontal);
-	}
-	.usermain .become_host{
-		margin-right: 10px;
-	}
-	paper-button{
-		--paper-button: {
+		<style>
+		:host{
+			display: block;
+		}
+		app-header{
 			background-color: #3498db;
 			color: #fff;
-			padding: 10px;
 		};
-	}
-		
-	</style>
+		app-drawer-layout{
+			font-size: 14px;
+		}
+		main{
+			display: flex;
+			width: 960px;
+			margin: 0 auto;
+		}
+		div.mainHosting{
+			display: block;
+			margin: 20px 50px 10px 10px;
+			color: #858689;
+			@apply(--layout-vertical);
+			width: 180px;
+			padding: 5px;
+			height: 300px;
+			border: 2px solid #858689;
+		}
+		.hr{
+        width: 80%;
+        padding: 0;
+        margin: 0 15px;
+      background-color: #919296;
+      height: 1px;
+      opacity: 0.5;
+      }
 
-	<div class="usermain">
-		<div class="become_host"><paper-button raised>Become Host</paper-button></div>
-	</div>
+		  paper-item{
+      --paper-item-min-height: 36px;
+    }
+    a{
+      text-decoration: none;
+      color: #919296;
+    }
+		</style>
+
+		<app-location route="{{route}}"></app-location>
+	    <app-route
+	        route="{{route}}"
+	        pattern="/:page"
+	        data="{{routeData}}"
+	        tail="{{subroute}}"></app-route>
+
+		<app-drawer-layout force-narrow fullbleed>
+		    <app-header-layout>
+		    	<app-header shadow>
+				    <app-toolbar>
+				   <!-- <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>-->
+				 </app-toolbar>
+				 <app-toolbar>
+				      <paper-icon-button icon="arrow-back"></paper-icon-button>
+				      <div spacer main-title>{{hostingdata}}</div>
+				    </app-toolbar>
+				</app-header>
+
+			</app-header-layout>
+			<app-drawer>
+			  	<hosting-main-drawer></hosting-main-drawer>
+			</app-drawer>
+
+			<main>
+				<div class="mainHosting">
+					<iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+					<a href="/hosting-general" name="hosting-general"><paper-item>Genereal</paper-item></a>
+					<div class="hr"></div>
+					<a href="/hosting-address" name="hosting-address"><paper-item>Address</paper-item></a>
+					<div class="hr"></div>
+
+					<a href="/hosting-kindofplace" name="hosting-kindofplace"><paper-item>Kind of place</paper-item></a>
+					<div class="hr"></div>
+					<a href="/hosting-amneties" name="hosting-amneties"><paper-item>Amneties</paper-item></a>
+					<div class="hr"></div>
+					<a href="/hosting-photos" name="hosting-photos"><paper-item>Photos</paper-item></a>
+					<div class="hr"></div>
+					<a href="/hosting-description" name="hosting-description"><paper-item>Description</paper-item></a>
+					<div class="hr"></div>
+					<a href="/hosting-settings" name="hosting-settings"><paper-item>Settings</paper-item></a>
+					<div class="hr"></div>
+					<a href="/hosting-publish" name="hosting-publish"><paper-item>Publish</paper-item>
+				</div>
+				  <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
+			          <hosting-general name="hosting-general"></hosting-general>
+			          <hosting-address name="hosting-address"></hosting-address>
+			          <hosting-kindofplace name="hosting-kindofplace"></hosting-kindofplace>
+			          <hosting-amneties name="hosting-amneties"></hosting-amneties>
+			          <hosting-photos name="hosting-photos"></hosting-photos>
+			          <hosting-description name="hosting-description"></hosting-description>
+			          <hosting-settings name="hosting-settings"></hosting-settings>
+			          <hosting-publish name="hosting-publish"></hosting-publish>
+			          <hosting-error name="hosting-error"></hosting-error>
+			        </iron-pages>
+			</main>
+		</app-drawer-layout>
 
 	</template>
+
 	<script>
 		Polymer({
 			is: 'become-host',
 			properties: {
-			},
-		});
+
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        }
+
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)'
+      ],
+
+      _routePageChanged: function(page) {
+        this.page = page || 'hosting-general';
+      },
+
+      _pageChanged: function(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl(page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _showPage404: function() {
+        this.page = 'hosting-error';
+      }
+	});
 	</script>
 </dom-module>

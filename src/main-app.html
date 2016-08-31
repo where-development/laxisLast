@@ -84,6 +84,21 @@
         @apply(--layout-horizontal);
         @apply(--layout-justified);
       }
+      .favorite{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      opacity: .7;
+    }
+    .favorite iron-icon{
+      --iron-icon-width: 34px;
+		  --iron-icon-height: 34px;
+    --iron-icon-fill-color: #37454d;
+    --iron-icon:{
+
+      color: #919296;
+    };
+  }
 
       /**
       *
@@ -206,12 +221,7 @@
 
 	/* Share*/
 	.share{
-		display: flex;
-		position: absolute;
-		z-index: 1000;
-		top: 20px;
-		right: 14%;
-
+		display: none;
 	}
 	paper-item iron-icon{
 		margin-right: 5px;
@@ -330,6 +340,14 @@
     app-drawer{
     	display: none;
     }
+    .share{
+  		display: flex;
+  		position: absolute;
+  		z-index: 1000;
+  		top: 20px;
+  		right: 14%;
+
+  	}
       main{
         @apply(--layout-start-justified);
       }
@@ -460,6 +478,7 @@
 	        <paper-card>
 		          <div class="card-title">
 		            <img src="{{item.img}}">
+                <div class="favorite"><iron-icon icon="favorite-border"></iron-icon></div>
 		          </div>
 		          <div class="namePost">
 		            <div>{{item.name}}</div>
