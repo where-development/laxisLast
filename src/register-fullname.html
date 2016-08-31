@@ -5,6 +5,7 @@
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-date-picker/paper-date-picker.html">
 <link rel="import" href="../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
@@ -16,12 +17,16 @@
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../bower_components/gold-phone-input/gold-phone-input.html">
 
 
 
-<dom-module id="register-user">
+<dom-module id="register-fullname">
   <template>
     <style is="custom-style" include="iron-flex iron-flex-alignment">
     /* for main element - mobile first*/
@@ -44,6 +49,9 @@
       }
     }
     main{
+
+     display: flex;
+      @apply(--layout-center-justified);
       /*
       width: 960px;
       margin: 0 auto;*/
@@ -52,12 +60,14 @@
       padding: 5px;
     }
     main div, main p{
+
       text-align: center;
     }
     .mycard{
+      margin-top: 20px;
       display: flex;
       @apply(--layout-center-justified);
-      @apply(--layout-vertical);
+      @apply(--layout-horizontal);
     }
     .iron-start iron-icon{
       display: block;
@@ -69,26 +79,12 @@
       --paper-card:{
         margin: 10px;
         padding: 5px;
-        width:94%;
+        width:320px;
       }
        --paper-card-content:{
          display: flex;
          @apply(--layout-vertical);
        }
-    }
-    paper-button.facebooksignin{
-      margin: 5px;
-      --paper-button:{
-        background-color: #4264b7;
-        color: #fff;
-      }
-    }
-    paper-button.googlesignin{
-      margin: 5px;
-      --paper-button:{
-        background-color: #dd4b39;
-        color: #fff;
-      }
     }
     paper-button.signup{
       --paper-button:{
@@ -106,6 +102,9 @@
       @apply(--layout-vertical);
       text-align: left;
     }
+    .signup{
+      margin: 5px;
+    }
     a{
       text-decoration: none;
       color: #3498db;
@@ -116,9 +115,36 @@
       background-color: #919296;
     }
     label{
-
       padding: 5px 0 5px 0;
     }
+    label iron-icon{
+      --iron-icon-height: 21px;
+      --iron-icon-width: 21px;
+    }
+    /*
+    gold-phone-input {
+      border: 1px solid #3498db;
+      background-color: #fff;
+      --paper-input-container-input:{
+        padding: 0;
+      }
+      --paper-input-container: {
+        padding: 0;
+        margin: 0;
+      };
+      --paper-input-container-label-floating: {
+        display: none;
+      }
+      --paper-input-container-underline: {
+        display: none;
+      };
+      --paper-input-container-underline-focus: {
+        display: none;
+      };
+    }
+    gold-phone-input{
+      phone-number-patter:{padding: 5px;}
+    }*/
     .forpassword{
       padding-top: 5px;
       margin: 0;
@@ -126,16 +152,37 @@
       font-size: 12px;
       opacity: .7;
     }
+    .card-title{
+      margin-top: 15px;
+      font-weight: 500;
+      font-size: 21px;
+    }
+    paper-tooltip{
+      --paper-tooltip-background: #fff;
+      border: 1px solid #3498db;
+      --paper-tooltip-opacity: 1;
+      --paper-tooltip-text-color: #37454d;
+      --paper-tooltip:{
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
     input, input:focus{
       width: 100%;
-      padding: 5px;
+      padding: 10px;
+      margin: 10px 0;
       border: 1px solid #3498db;
       font-family: 'Roboto', 'Noto', sans-serif;
       font-weight: 400px;
-      font-size: 14px;
+      font-size: 15px;
       color: #37454d;
       outline: none !important;
       border-color: #3498db;
+    }
+    input[type="date"]{
+      text-transform: uppercase;
+      font-size: 15px;
+      color: #37454d;
     }
     paper-checkbox{
       font-size: 15px;
@@ -145,14 +192,6 @@
       padding: 10px 0 10px 0;
     }
       @media screen and (min-width : 640px){
-        paper-card{
-          background: #eeeeee;
-          --paper-card:{
-            margin: 10px;
-            padding: 5px;
-            width:38%;
-          }
-        }
         .mycard{
           display: flex;
           @apply(--layout-center-justified);
@@ -179,55 +218,27 @@
           </app-toolbar>
         </app-header>
         <main>
-          <div>
-            <h2>Create an account to do more with trivago, for free!</h2>
-          </div>
-          <div>
-            <p>
-              By creating an account you can save and share multiple hotel lists with your fellow travellers. You can even create price alerts for your upcoming trips.We will automatically sync your account across all of your devices.
-            </p>
-          </div>
           <div class="mycard">
+
             <paper-card>
-              <div class="card-title">Sign up with a social network</div>
-              <div class="card-content">
-                <paper-button raised class="facebooksignin"><div class="iron-start"><iron-icon icon="mdi:facebook"></iron-icon></div><div>Facebook</div></paper-button>
-                <paper-button raised class="googlesignin"><div class="iron-start"><iron-icon icon="mdi:twitter"></iron-icon></div><div>Google+</div></paper-button>
-              </div>
-              <div>
-                <p>
-                  We will not post to Facebook/Google+ without checking with you first.
-                </p>
-              </div>
-            </paper-card>
-            <paper-card>
-              <div class="card-title">Sign up with your email</div>
+              <div class="card-title">Your personal details</div>
               <div class="card-content">
                 <form>
-                  <label>Email address</label>
-                  <input type="email" placeholder="Address Email" />
-                  <label>Password</label>
-                  <input type="text" placeholder="Password" />
-                  <div class="forpassword">
-                    At least 6 characters
-                  </div>
-                  <paper-checkbox>Show my password</paper-checkbox>
-                  <paper-button raised class="signup">Sign up</paper-button>
+                  <input type="email" placeholder="First name" />
+                  <input type="text" placeholder="Last name" />
+                  <input type="number" placeholder="Phone number" />
+                  <label>Birthday <iron-icon icon="help" id="birthday"></iron-icon></label>
+                  <input type="date" />
+                  <paper-tooltip for="birthday" offset="0" position="top">To sign up, you must be 18 or older.<br />Other people won't see your birthday</paper-tooltip>
+                  <paper-checkbox>
+I’d like to receive promotions, surveys, and updates via email about Airbnb and its partner’s campaigns and services.</paper-checkbox>
+                  <paper-button raised class="signup">Save</paper-button>
                 </form>
               </div>
+
             </paper-card>
           </div>
-          <div>
-            <p>
-              By signing up, I agree to Airbnb’s <a href="/#"> Terms of Service </a>,<a href="/#"> Payments Terms of Service </a>,<a href="/#"> Privacy Policy</a>, <a href="/#"> Guest Refund Policy</a>, and <a href="/#"> Host Guarantee Terms.</a>
-            </p>
-          </div>
-          <hr />
-          <div>
-            <p>
-              Already have an account? <a href="/#">Log in</a>
-            </p>
-          </div>
+
 
         </main>
     </app-header-layout>
@@ -237,7 +248,7 @@
 
   <script>
     Polymer({
-      is: 'register-user',
+      is: 'register-fullname',
     });
   </script>
 </dom-module>
